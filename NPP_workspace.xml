@@ -1,0 +1,86 @@
+<NotepadPlus>
+    <Project name="Archespace">
+        <Folder name="h">
+            <File name="h\Bullet.h" />
+            <File name="h\main.h" />
+            <File name="h\Ship.h" />
+            <File name="h\Window.h" />
+        </Folder>
+        <Folder name="res">
+            <Folder name="other">
+                <File name="res\other\large_ship.PNG" />
+                <File name="res\other\ship (10).png" />
+                <File name="res\other\ship (11).png" />
+                <File name="res\other\ship (13).png" />
+                <File name="res\other\ship (16).png" />
+                <File name="res\other\ship (4).png" />
+                <File name="res\other\ship (5).png" />
+                <File name="res\other\ship (6).png" />
+                <File name="res\other\ship (7).png" />
+                <File name="res\other\ship (8).png" />
+                <File name="res\other\ship (9).png" />
+                <File name="res\other\Ship.png" />
+                <File name="res\other\ship1.png" />
+                <File name="res\other\ship9b.png" />
+                <File name="res\other\Ship_1.png" />
+                <File name="res\other\ship_2 (2).png" />
+                <File name="res\other\Ship_2.png" />
+                <File name="res\other\ship_3 (2).png" />
+                <File name="res\other\Ship_3.png" />
+                <File name="res\other\ship_4 (2).png" />
+                <File name="res\other\Ship_4.png" />
+            </Folder>
+            <Folder name="ships">
+                <Folder name="astroids">
+                    <File name="res\ships\astroids\astroid_1.png" />
+                    <File name="res\ships\astroids\astroid_2.png" />
+                    <File name="res\ships\astroids\astroid_3.png" />
+                    <File name="res\ships\astroids\astroid_4.png" />
+                </Folder>
+                <Folder name="enemy">
+                    <File name="res\ships\enemy\boss_1.png" />
+                    <File name="res\ships\enemy\boss_2.png" />
+                    <File name="res\ships\enemy\Boss_3.png" />
+                    <File name="res\ships\enemy\ship_1.png" />
+                    <File name="res\ships\enemy\ship_2.png" />
+                    <File name="res\ships\enemy\ship_3.png" />
+                </Folder>
+                <Folder name="friend">
+                    <File name="res\ships\friend\ship_1.png" />
+                </Folder>
+            </Folder>
+            <File name="res\arial.ttf" />
+            <File name="res\background.jpg" />
+            <File name="res\bullet_collection.png" />
+            <File name="res\bullet_collection_2.png" />
+            <File name="res\icon.ico" />
+            <File name="res\icon.png" />
+        </Folder>
+        <File name="Bullet.cpp" />
+        <File name="doxygen.ini" />
+        <File name="info.h" />
+        <File name="main.cpp" />
+        <File name="Makefile" />
+        <File name="Powerup.cpp" />
+        <File name="README.md" />
+        <File name="res.rc" />
+        <File name="Ship.cpp" />
+        <File name="Window.cpp" />
+    </Project>
+    <Project name="TheFinalGalaxy">
+        <Folder name="bin" />
+        <Folder name="h">
+            <File name="C:\Working\C++\TheFinalGalaxy\h\main.h" />
+            <File name="C:\Working\C++\TheFinalGalaxy\h\Thing.h" />
+        </Folder>
+        <Folder name="obj" />
+        <Folder name="res">
+            <File name="C:\Working\C++\TheFinalGalaxy\res\icon.ico" />
+        </Folder>
+        <File name="C:\Working\C++\TheFinalGalaxy\info.h" />
+        <File name="C:\Working\C++\TheFinalGalaxy\main.cpp" />
+        <File name="C:\Working\C++\TheFinalGalaxy\Makefile" />
+        <File name="C:\Working\C++\TheFinalGalaxy\res.rc" />
+        <File name="C:\Working\C++\TheFinalGalaxy\Thing.cpp" />
+    </Project>
+</NotepadPlus>
