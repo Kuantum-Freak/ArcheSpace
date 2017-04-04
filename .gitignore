@@ -9,6 +9,7 @@ bin/
 tmp/
 docs/
 arc/
+res/NULL/
 *.tmp
 *.bak
 *.swp
