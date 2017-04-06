@@ -100,7 +100,7 @@ void Window::init() {
 	shieldCounter = 0;
 	
 	SDL_Color textColor = {0xFF, 0xFF, 0xFF}; // White Font
-	SDL_Surface* tmpSurface = TTF_RenderText_Blended( // Create temp Surface for text
+	SDL_Surface* tmpSurface = TTF_RenderText_Blended( // Create temp Surface for title
 		Master_Resource->titleFont,
 		R_PRGMNAME, 
 		textColor
@@ -129,13 +129,13 @@ void Window::renderFrame() {
 	this->drawPoints(); // Draw our point
 	this->drawHealth(); // Draw our health bar
 
-	if(hasShield) {
+	if(hasShield) { // If we have a sheild, then render
 		if(shieldCounter >= FPS * POWERUP_TIME)
 			hasShield = false;
 		this->drawShield();
 	}
 	
-	if(lost)
+	if(lost) // If we have lost then render the lost text
 		displayLose();
 	
 	SDL_RenderPresent(renderer); // Present our renderer
@@ -143,18 +143,18 @@ void Window::renderFrame() {
 
 
 void Window::createEnemy() {
-	// SHIP TYPE
-	ShipTypes tmpShipType = (ShipTypes)(rand() % 4 == 0)?
+	// Create random enemy
+	ShipTypes tmpShipType = (ShipTypes)(rand() % 4 == 0)? // SHIP TYPE
 		SHIP_ASTROID : SHIP_ENEMY;
-	//SIZES
+		
 	int tempNum = rand();
-	Sizes tmpSize = (Sizes)
+	Sizes tmpSize = (Sizes) //SIZES
 		  (tempNum % 6 == 0)? SMALL_SIZE
 		: (tempNum % 6 <= 3)? MEDIUM_SIZE
 		: LARGE_SIZE;
-	//SPEED
+	
 	tempNum = rand();
-	Speeds tmpSpeed = (Speeds)
+	Speeds tmpSpeed = (Speeds) //SPEED
 		  (tempNum % TOTAL_SPEED == 1)? SLOW_SPEED
 		: (tempNum % TOTAL_SPEED == 2)? MEDIUM_SPEED
 		: FAST_SPEED;

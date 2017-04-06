@@ -28,7 +28,7 @@
 #include ".\h\debug.h"
 
 Powerup::Powerup(PowerupType type) {
-	PowerupSubtype subtype;
+	PowerupSubtype subtype; // create subtype var
 	switch(type) {
 		case FIRE_POWERUP:
 			subtype = (PowerupSubtype)((rand() % 3) + FIRE_POWERUP_1);
@@ -52,8 +52,8 @@ Powerup::Powerup(PowerupType type) {
 		break;
 	}
 	
-	powerup = Master_Resource->spriteSheets[0];
-	clipping = Master_Resource->clip_powerup[subtype];
+	powerup = Master_Resource->spriteSheets[0]; // set up spritesheet used for powerups
+	clipping = Master_Resource->clip_powerup[subtype]; // get the clipping used for the powerup
 	
 	position = SDL_Rect{
 		rand() % (SCRN_W - 60), /// x position is a random value on the screen 
@@ -75,12 +75,12 @@ Powerup::~Powerup() {
 
 
 void Powerup::move() {
-	if(isDestroyed) {
+	if(isDestroyed) { // id destroyed, increment destroy counter
 		destCounter += 25;
 		if(destCounter >= 254)
 			this->destroy();
 	} else {
-		this->position.y += POWERUP_SPEED;
+		this->position.y += POWERUP_SPEED; // move down the powerup
 	}
 	
 	if(atEndofMap())
@@ -89,14 +89,14 @@ void Powerup::move() {
 
 
 void Powerup::render() {	
-	if(isDestroyed) {
+	if(isDestroyed) { // if destroyed fade out the powerup
 		SDL_SetTextureAlphaMod(powerup, 255 - destCounter);
 		SDL_RenderCopy(Main_Window->renderer, powerup, &clipping, &position);
 		SDL_SetTextureAlphaMod(powerup, 255);
 		return;
 	}
 	
-	SDL_RenderCopy(Main_Window->renderer, powerup, &clipping, &position);
+	SDL_RenderCopy(Main_Window->renderer, powerup, &clipping, &position); // render
 	
 }
 
@@ -104,7 +104,7 @@ void Powerup::render() {
 void Powerup::destroy() {
 	for(unsigned i = 0; i < Main_Window->powerups.size(); ++i) {
 		if(this == Main_Window->powerups[i])
-			Main_Window->powerups.erase(Main_Window->powerups.begin() + i);
+			Main_Window->powerups.erase(Main_Window->powerups.begin() + i); // remove the powerup from the game
 	}
 	
 	delete this;
@@ -112,7 +112,7 @@ void Powerup::destroy() {
 
 
 void Powerup::doPowerup() {
-	switch(type) {
+	switch(type) { // Do power-up depending on type
 		case FIRE_POWERUP_1:
 			Main_Window->playerShip->turnOnDoubleFire();
 		break;

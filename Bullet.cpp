@@ -28,18 +28,18 @@
 #include ".\h\debug.h"
 
 Bullet::Bullet(Direction direction, int x, int y) {
-	this->direction = direction;
+	this->direction = direction; // set direction
 	
-	if(direction == UP_DIRECTION)
+	if(direction == UP_DIRECTION) // set clipping based on what direction its going
 		clipping = Master_Resource->clip_bullets[0];
 	else if(direction == DOWN_DIRECTION)
 		clipping = Master_Resource->clip_bullets[1];
 	
-	bulletSheets = Master_Resource->spriteSheets[1];
+	bulletSheets = Master_Resource->spriteSheets[1]; // set sprite sheet
 	
 	speed = 10;
 	
-	if(direction == UP_DIRECTION)
+	if(direction == UP_DIRECTION) // set the position of the bullet based off the shooter
 		position = SDL_Rect{x - 7, SCRN_H - 95, 14, 40};
 	else if(direction == DOWN_DIRECTION)
 		position = SDL_Rect{x - 7, y, 14, 40};
@@ -47,9 +47,9 @@ Bullet::Bullet(Direction direction, int x, int y) {
 	isExploding = false;
 	exCounter = 0;
 	
-	this->explosionSheet = Master_Resource->explosion;
+	this->explosionSheet = Master_Resource->explosion; // set the explosion sheet
 	
-	Main_Window->playFireSound();
+	Main_Window->playFireSound(); // play the fire sound
 }
 
 
@@ -60,7 +60,7 @@ Bullet::~Bullet() {
 
 
 void Bullet::render() {
-	if(isExploding) {
+	if(isExploding) { // if it is exploding then render the explosion animation
 		SDL_Rect explosionClipping = {
 			(exCounter % 9) * 100,
 			(exCounter / 9) * 100,
@@ -78,7 +78,7 @@ void Bullet::render() {
 		return;
 	}
 	
-	if(direction == UP_DIRECTION) {
+	if(direction == UP_DIRECTION) { // if its going up then render it pointing up
 		SDL_RenderCopy(
 			Main_Window->renderer,
 			bulletSheets,
@@ -87,8 +87,8 @@ void Bullet::render() {
 		);
 	}
 	
-	if(direction == DOWN_DIRECTION)	{	
-		SDL_RenderCopyEx( // Flip the ship 180 so its pointing down then draw it
+	if(direction == DOWN_DIRECTION)	{ // If bullet is going down then rotate it so it points down
+		SDL_RenderCopyEx( // Flip the bullet 180 so its pointing down then draw it
 			Main_Window->renderer,
 			this->bulletSheets,
 			&this->clipping,
@@ -102,43 +102,43 @@ void Bullet::render() {
 
 
 void Bullet::move() {
-	if(isExploding) {
+	if(isExploding) { // If we are exploding then dont move, just increment counter
 		exCounter++;
 		if(exCounter >= 80)
 			this->destroy();
 		return;
 	}
 	
-	if(this->checkBulletHit())
+	if(this->checkBulletHit()) // If another bullet has hit us then explode
 		this->explode();
 	
-	if     (direction == UP_DIRECTION)
+	if     (direction == UP_DIRECTION) // change the position depending on what the direction is
 		this->position.y -= speed;
 	else if(direction == DOWN_DIRECTION)
 		this->position.y += speed;
 	
-	if(atEndOfMap())
+	if(atEndOfMap()) // if its at the end of the map then destroy
 		this->destroy();
 }
 
 
 void Bullet::destroy() {
-	for(unsigned i = 0; i < Main_Window->playerBullets.size(); ++i) {
-		if(this == Main_Window->playerBullets[i])
-			Main_Window->playerBullets.erase(Main_Window->playerBullets.begin() + i);
+	for(unsigned i = 0; i < Main_Window->playerBullets.size(); ++i) { // go through playerBullet
+		if(this == Main_Window->playerBullets[i]) // and see if we are in there
+			Main_Window->playerBullets.erase(Main_Window->playerBullets.begin() + i); // if we are erase ourself
 	}
 	
-	for(unsigned i = 0; i < Main_Window->enemyBullets.size(); ++i) {
+	for(unsigned i = 0; i < Main_Window->enemyBullets.size(); ++i) { // also go through enemyBullets
 		if(this == Main_Window->enemyBullets[i])
 			Main_Window->enemyBullets.erase(Main_Window->enemyBullets.begin() + i);
 	}
 	
-	delete this;
+	delete this; // and delete ourself
 }
 
 
 bool Bullet::atEndOfMap() {
-	if(direction == UP_DIRECTION)
+	if(direction == UP_DIRECTION) // if bullet is going up, check if at top of map
 		return this->position.y + position.h < 0;
 	if(direction == DOWN_DIRECTION)
 		return this->position.y > SCRN_H; // Bottom is at the end of the map
@@ -150,17 +150,17 @@ void Bullet::explode() {
 	exCounter = 0;
 	isExploding = true;
 	
-	if(direction == UP_DIRECTION)
+	if(direction == UP_DIRECTION) // if bullet is going up then move explosion a bit up, for astetic reasons
 		position.y -= 30;
 	
-	position.w = position.h;
+	position.w = position.h; // make square explosion and preserve aspect ratio of explosion
 }
 
 
 bool Bullet::checkBulletHit() {
 	switch(this->direction) {
 		case UP_DIRECTION:
-			for(auto tmpBullet: Main_Window->enemyBullets) {
+			for(auto tmpBullet: Main_Window->enemyBullets) { // check collisions with enemy bullets
 				if(checkCollision(tmpBullet->position, this->position)) {
 					if(tmpBullet->isExploding)
 						continue;
@@ -172,7 +172,7 @@ bool Bullet::checkBulletHit() {
 		break;
 		
 		case DOWN_DIRECTION:
-			for(auto tmpBullet: Main_Window->playerBullets) {
+			for(auto tmpBullet: Main_Window->playerBullets) { // check collisions with player bullets
 				if(checkCollision(tmpBullet->position, this->position)) {
 					if(tmpBullet->isExploding)
 						continue;

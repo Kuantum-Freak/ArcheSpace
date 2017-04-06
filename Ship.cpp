@@ -139,7 +139,7 @@ Ship::~Ship() {
 
 
 void Ship::render() {
-	if(this->hasExploded) {
+	if(this->hasExploded) { // if ship has exploded, render the explosion animation
 		SDL_Rect explosionClipping = {
 			(exCounter % 9) * 100,
 			(exCounter / 9) * 100,
@@ -159,7 +159,7 @@ void Ship::render() {
 	
 	switch(this->type) {
 		case SHIP_PLAYER: // If the ship is the player's ship
-			SDL_RenderCopyEx( // Flip the ship 180 so its pointing down then draw it
+			SDL_RenderCopyEx( // Flip the ship 180 so its pointing up then draw it
 				Main_Window->renderer,
 				this->texture,
 				&this->clipping,
@@ -169,7 +169,7 @@ void Ship::render() {
 				SDL_FLIP_VERTICAL
 			);
 			
-			if(hasShield) {
+			if(hasShield) { // if the player has the shield then render that too
 				SDL_Rect pos = SDL_Rect{
 					this->position.x - (this->shieldClipping.w + this->position.w) / 2,
 					this->position.y - (this->shieldClipping.h + this->position.h) / 2,
@@ -177,7 +177,7 @@ void Ship::render() {
 					this->shieldClipping.h
 				};
 				
-				SDL_RenderCopy( // Draw the ship on the renderer
+				SDL_RenderCopy( // Draw the shield
 					Main_Window->renderer,
 					this->shieldTexture,
 					&this->shieldClipping,
@@ -200,7 +200,7 @@ void Ship::render() {
 
 
 void Ship::move() {	
-	if(this->hasExploded) {
+	if(this->hasExploded) { // if ship is exploding then increment the explosion counter
 		this->exCounter++;
 		if(this->exCounter >= 80)
 			this->destroy();
@@ -219,43 +219,43 @@ void Ship::move() {
 			if(this->position.x + this->position.w > SCRN_W) // If the ship is at the right edge
 				this->position.x -= this->speed; // Go left
 				
-			if(this->checkBulletHit()) {
-				if(!this->hasShield)
-					Main_Window->removeLife(1);
+			if(this->checkBulletHit()) { // if a bullet hit it
+				if(!this->hasShield)     // and shield isn't on
+					Main_Window->removeLife(1); // remove a life
 			}
 			
 			Powerup* tmpPowerup;
-			if(NULL != (tmpPowerup = this->getPowerup())) {
-				tmpPowerup->doPowerup();
-				tmpPowerup->isDestroyed = true;
+			if(NULL != (tmpPowerup = this->getPowerup())) { // get closest powerup
+				tmpPowerup->doPowerup(); // and do powerup
+				tmpPowerup->isDestroyed = true; // then destroy it
 			}
 			tmpPowerup = NULL;
 			
-			if(this->hasRapidFire) {
+			if(this->hasRapidFire) { // If we have rapid fire then so it
 				this->RFcounter++;
 				
-				if(this->RFcounter % 2 == 0)
+				if(this->RFcounter % 2 == 0) // fire every other frame
 					this->fire();
 				
-				if(this->RFcounter >= (FPS * POWERUP_TIME) / 2) {
+				if(this->RFcounter >= (FPS * POWERUP_TIME) / 2) { // if the timer for rapid fire is over then turn it off
 					this->hasRapidFire = false;
 					this->RFcounter = 0;
 				}
 			}
 			
-			if(this->hasDoubleFire) {
+			if(this->hasDoubleFire) { // if we have double fire
 				this->DFcounter++;
 				
-				if(this->DFcounter >= FPS * POWERUP_TIME) {
+				if(this->DFcounter >= FPS * POWERUP_TIME) { // turn off if timer is over
 					this->hasDoubleFire = false;
 					this->DFcounter = 0;
 				}
 			}
 			
-			if(this->hasShield) {
+			if(this->hasShield) { // if we have the shield
 				this->shieldCounter++;
 				
-				if(this->shieldCounter >= FPS * POWERUP_TIME) {
+				if(this->shieldCounter >= FPS * POWERUP_TIME) { // turn off if timer is done
 					this->hasShield = false;
 					this->shieldCounter = 0;
 				}
@@ -302,7 +302,7 @@ void Ship::move() {
 				return;
 			}
 			
-			if(Main_Window->hasShield && atShield()) {
+			if(Main_Window->hasShield && atShield()) { // if ship is at the shield then suicide
 				this->hasExploded = true;
 				return;
 			}
@@ -419,10 +419,9 @@ void Ship::changeDirection(Direction direction) {
 
 bool Ship::checkBulletHit() {
 	if(this->type == SHIP_ENEMY || this->type == SHIP_ASTROID) {
-		/// @todo Change this to a range based for loop, so its shorter
-		for(auto tmpBullet: Main_Window->playerBullets) {
+		for(auto& tmpBullet: Main_Window->playerBullets) { // Check collisions with player's bullets
 			if(checkCollision(tmpBullet->position, this->position)) {
-				if(tmpBullet->isExploding)
+				if(tmpBullet->isExploding) // if bullet is already exploding then check next bullet
 					continue;
 					
 				tmpBullet->explode(); // Destroy the bullet
@@ -432,14 +431,14 @@ bool Ship::checkBulletHit() {
 	}
 	
 	if(type == SHIP_PLAYER || type == SHIP_ASTROID) {
-		if(hasShield) {
+		if(hasShield) { // If shield is on, using shield Position not actual position
 			SDL_Rect shieldPosition = SDL_Rect{
 				this->position.x - 47,
 				this->position.y - 47,
 				this->shieldClipping.w,
 				this->shieldClipping.h
 			};
-			for(auto tmpBullet: Main_Window->enemyBullets) {
+			for(auto& tmpBullet: Main_Window->enemyBullets) {
 				if(checkCollision(tmpBullet->position, shieldPosition)) {
 					if(tmpBullet->isExploding)
 						continue;
@@ -450,7 +449,7 @@ bool Ship::checkBulletHit() {
 			}
 		} else {
 			/// @todo Change this to a range based for loop, so its shorter
-			for(auto tmpBullet: Main_Window->enemyBullets) {
+			for(auto& tmpBullet: Main_Window->enemyBullets) {
 				if(checkCollision(tmpBullet->position, this->position)) {
 					if(tmpBullet->isExploding)
 						continue;
@@ -489,6 +488,5 @@ bool Ship::atEndOfMap() {
 
 
 bool Ship::atShield() {
-	return (this->position.y + this->position.h) > SCRN_H - 35; // Bottom is at the end of the map
-	// @note this ads a 10px padding at the bottom of the "end of map"
+	return (this->position.y + this->position.h) > SCRN_H - 35; // check if at sheild
 }
