@@ -8,13 +8,13 @@ A modern graphical version of a top-down space shooter. I created this game as m
 
 Make sure that you have the SDL libraries. You will need:
 1. SDL2
-  * https://www.libsdl.org/download-2.0.php
+    * https://www.libsdl.org/download-2.0.php
 2. SDL_Image
-  * https://www.libsdl.org/projects/SDL_image/
+    * https://www.libsdl.org/projects/SDL_image/
 3. SDL_TTF
-  * https://www.libsdl.org/projects/SDL_ttf/
+    * https://www.libsdl.org/projects/SDL_ttf/
 4. SDL_Mixer
-  * https://www.libsdl.org/projects/SDL_mixer/
+    * https://www.libsdl.org/projects/SDL_mixer/
   
 If you have trouble installing them, or would like to know how, Lazy Foo Tuturials are a great place to start: http://lazyfoo.net/tutorials/SDL/index.php 
 
