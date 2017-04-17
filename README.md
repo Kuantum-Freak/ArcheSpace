@@ -57,5 +57,6 @@ Copyright (c) 2017 The Gupta Empire - All Rights Reserved
 
 ## Acknowledgments
 
+* Thank you [kenney.nl](https://kenney.nl/) for alot of the sprites
 * Thanks for all my friends that gave me inspiration and ideas
 * Thanks to anyone else that may have slipped my mind
