@@ -27,7 +27,7 @@ If you have trouble installing them, or would like to know how, Lazy Foo Tuturia
 First you need to make sure that the SDL libs are correctally found in the Makefile. 
 
 Goto line 31 and 32 in the Makefile:
-```Makefile
+``` Makefile
 L_SDLC = -IC:\Compiler\SDL\include\SDL2 
 L_SDLL = -LC:\Compiler\SDL\lib
 ```
