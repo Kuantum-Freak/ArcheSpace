@@ -1,87 +1,57 @@
 # Archespace
 
-One Paragraph of project description goes here
+A modern graphical version of a top-down space shooter. I created this game as my first serious attempt to use SDL, a C++ Graphics Library. 
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+## Installing
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Make sure that you have the SDL libraries. You will need:
+1. SDL2
+  * https://www.libsdl.org/download-2.0.php
+2. SDL_Image
+  * https://www.libsdl.org/projects/SDL_image/
+3. SDL_TTF
+  * https://www.libsdl.org/projects/SDL_ttf/
+4. SDL_Mixer
+  * https://www.libsdl.org/projects/SDL_mixer/
+  
+If you have trouble installing them, or would like to know how, Lazy Foo Tuturials are a great place to start: http://lazyfoo.net/tutorials/SDL/index.php 
 
+### Compiling
+
+First you need to make sure that the SDL libs are correctally found in the Makefile. 
+
+Goto line 31 and 32 in the Makefile:
+```Makefile
+L_SDLC = -IC:\Compiler\SDL\include\SDL2 
+L_SDLL = -LC:\Compiler\SDL\lib
 ```
-Give examples
-```
+And replace the libs directories to the correct path. 
 
-### Installing
-
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+After you have that then you can simply run `<make> .\bin\main.exe`. The executable should be created in the `.\bin` folder: `.\bin\main.exe`
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [SDL](https://www.libsdl.org/) - Simple DirectMedia Layer
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Aryan Gupta** - *The Whole Shebang* - [My Site](https://theguptaempire.net)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+Copyright (c) 2017 The Gupta Empire - All Rights Reserved
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* Thanks for all my friends that gave me inspiration and ideas
+* Thanks to anyone else that may have slipped my mind
