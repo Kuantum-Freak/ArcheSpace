@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="res/icon.png" alt="Program Icon" width="200"/>
+</p>
+
 # Archespace
 
 A modern graphical version of a top-down space shooter. I created this game as my first serious attempt to use SDL, a C++ Graphics Library. 
