@@ -38,7 +38,7 @@ Window::Window() {
 	SDL_DisplayMode mode;
 	SDL_GetCurrentDisplayMode(0, &mode); // Get the properties of the screen
 
-	SCRN_H = mode.h - 60;  // Set Window width
+	SCRN_H = mode.h - 100;  // Set Window width
 	SCRN_W = 580; //mode.w; // Set Window width	
 	
 	if( NULL ==
