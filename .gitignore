@@ -5,7 +5,7 @@
 *.pydevproject
 .project
 .metadata
-bin/
+bin/*.exe
 tmp/
 docs/
 arc/
@@ -50,8 +50,8 @@ local.properties
 [Rr]elease/
 x64/
 build/
-[Bb]in/
-[Oo]bj/
+[Bb]in/*.exe
+[Oo]bj/*.o
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
