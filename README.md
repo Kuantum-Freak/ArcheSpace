@@ -6,8 +6,9 @@
 
 A modern graphical version of a top-down space shooter. I created this game as my first serious attempt to use SDL, a C++ Graphics Library. 
 
-<img style="float: right;" src="res/screenshot1.PNG">
-
+<p align="center">
+  <img src="res/screenshot1.PNG" alt="Game Screenshot" height="500" />
+</p>
 
 ## Installing
 
